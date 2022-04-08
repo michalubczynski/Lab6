@@ -1,0 +1,6 @@
+C:\Users\micha\source\repos\Lab6\Obliczenia\bin\Debug\Obliczenia.dll
+C:\Users\micha\source\repos\Lab6\Obliczenia\bin\Debug\Obliczenia.pdb
+C:\Users\micha\source\repos\Lab6\Obliczenia\obj\Debug\Obliczenia.csproj.AssemblyReference.cache
+C:\Users\micha\source\repos\Lab6\Obliczenia\obj\Debug\Obliczenia.csproj.CoreCompileInputs.cache
+C:\Users\micha\source\repos\Lab6\Obliczenia\obj\Debug\Obliczenia.dll
+C:\Users\micha\source\repos\Lab6\Obliczenia\obj\Debug\Obliczenia.pdb
