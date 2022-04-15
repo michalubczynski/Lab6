@@ -7,9 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="btnRosenbrocka" Content="Funkcja Rosenbrocka" HorizontalAlignment="Left" Margin="113,312,0,0" VerticalAlignment="Top" Click="btnRosenbrocka_Click"/>
-        <Button x:Name="btnF2" Content="Funkcja druga" HorizontalAlignment="Left" Margin="400,312,0,0" VerticalAlignment="Top" Click="btnF2_Click"/>
-        <Button x:Name="btnF3" Content="Funkcja trzecia" HorizontalAlignment="Left" Margin="613,312,0,0" VerticalAlignment="Top" Click="btnF3_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="391*"/>
+            <ColumnDefinition Width="409*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnRosenbrocka" Content="Funkcja Rosenbrocka" HorizontalAlignment="Left" Margin="10,404,0,0" VerticalAlignment="Top" Click="btnRosenbrocka_Click"/>
+        <Button x:Name="btnF2" Content="Funkcja druga" HorizontalAlignment="Left" Margin="361,404,0,0" VerticalAlignment="Top" Click="btnF2_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnF3" Content="Funkcja trzecia" HorizontalAlignment="Left" Margin="317,404,0,0" VerticalAlignment="Top" Click="btnF3_Click" Grid.Column="1"/>
+        <ListBox x:Name="lst1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,74,189,232"/>
+        <ListBox x:Name="lst2" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="207,10,400,296" Grid.ColumnSpan="2"/>
+        <ListBox x:Name="lst3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="14,72,200,232" Grid.Column="1"/>
+        <ListBox x:Name="lst4" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="209,72,10,234" Grid.Column="1"/>
+        <Button x:Name="btn4" Content="Button" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Center" Grid.Column="1" Click="btn4_Click"/>
+        <Button x:Name="btn3" Content="Button" HorizontalAlignment="Left" Margin="89,0,0,0" VerticalAlignment="Center" Grid.Column="1" Click="btn3_Click"/>
+        <Button x:Name="btn2" Content="Button" HorizontalAlignment="Left" Margin="281,0,0,0" VerticalAlignment="Center" Click="btn2_Click"/>
+        <Button x:Name="btn1" Content="Button" HorizontalAlignment="Left" Margin="86,0,0,0" VerticalAlignment="Center" Click="btn1_Click"/>
+        <ListBox x:Name="lstBoxKategorie" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="207,143,405,232" Grid.ColumnSpan="2"/>
+        <Label Grid.Column="1" Content="Towary których cena jest powyżej " HorizontalAlignment="Left" Margin="14,9,0,0" VerticalAlignment="Top" Width="190" Height="25"/>
+        <Label x:Name="lbl3" Grid.Column="1" Content="średniej która wynosi: " HorizontalAlignment="Left" Margin="14,39,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btn5" Content="Pokaz najdrozszy towar" HorizontalAlignment="Left" Margin="252,313,0,0" VerticalAlignment="Top" Width="139" Click="btn5_Click"/>
+        <Label x:Name="lbl5" Grid.Column="1" Content="Towar to:" HorizontalAlignment="Left" Margin="9,310,0,0" VerticalAlignment="Top"/>
+        <Label Content="Towary gdzie il. &gt;5 sorted desc" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

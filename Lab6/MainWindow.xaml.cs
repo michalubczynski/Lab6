@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Obliczenia;
-
+using Sprzedaz;
 namespace Lab6
 {
     /// <summary>
@@ -21,9 +21,38 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Towary> towaryList;
+        decimal sredniaCena = 0;
+        decimal najwyzszaCena = 0;
         public MainWindow()
         {
             InitializeComponent();
+            towaryList = new List<Towary>();
+            towaryList.Add(new Towary() { Cena=4.20M, Nazwa="Zielone", KategoryOfProduct = Kategoria.Spozywka,Ilosc=5 });
+            towaryList.Add(new Towary() { Cena = 50M, Nazwa = "Bluza", KategoryOfProduct = Kategoria.Odziez, Ilosc=4 });
+            towaryList.Add(new Towary() { Cena = 2M, Nazwa = "Banan", KategoryOfProduct = Kategoria.Spozywka, Ilosc=10 });
+            towaryList.Add(new Towary() { Cena = 30M, Nazwa = "Szklo", KategoryOfProduct = Kategoria.Spozywka, Ilosc=1 });
+            towaryList.Add(new Towary() { Cena = 40M, Nazwa = "Picka", KategoryOfProduct = Kategoria.Spozywka, Ilosc=4 });
+            towaryList.Add(new Towary() { Cena = 12.55M, Nazwa = "Czapa", KategoryOfProduct = Kategoria.Odziez, Ilosc=4 });
+            towaryList.Add(new Towary() { Cena = 40M, Nazwa = "Toster", KategoryOfProduct = Kategoria.Spozywka, Ilosc=1 });
+            towaryList.Add(new Towary() { Cena = 69M, Nazwa = "Soksy", KategoryOfProduct = Kategoria.Odziez, Ilosc=8 });
+            towaryList.Add(new Towary() { Cena = 69M, Nazwa = "Posejdon", KategoryOfProduct = Kategoria.Chemia, Ilosc=1 });
+            towaryList.Add(new Towary() { Cena = 21.37M, Nazwa = "Domestos", KategoryOfProduct = Kategoria.Chemia, Ilosc=2 });
+            
+            lstBoxKategorie.Items.Add(Kategoria.Odziez);
+            lstBoxKategorie.Items.Add(Kategoria.Chemia);
+            lstBoxKategorie.Items.Add(Kategoria.Spozywka);
+
+            var towary = from s in towaryList select s.Cena;
+            foreach (var t in towary)
+            {
+                sredniaCena += t;
+                var pomocniczaCena = t;
+                if (pomocniczaCena>najwyzszaCena)najwyzszaCena = pomocniczaCena;
+            }
+            sredniaCena /= towaryList.Count();
+            lbl3.Content += sredniaCena.ToString()+"zl";
+
 
         }
         public double FunkcjaRosenbrocka(double x, double y) {
@@ -58,5 +87,88 @@ namespace Lab6
             wynik = Funkcje.ZnajdzMinimumFunkcji2D(0, 0, 1, 1, 1000, FunkcjaRosenbrocka);
             MessageBox.Show(wynik.Item1 + wynik.Item2.ToString());
         }
+    
+        public (double,double) ObliczKolo(double r)
+        {
+            double pole = Math.PI * r * r;
+            double obwod = 2 * Math.PI * r;
+            return (pole, obwod);
+        }
+
+        private void btn1_Click(object sender, RoutedEventArgs e)
+        {
+            var towary = from s in towaryList where s.Ilosc > 5 orderby s.Ilosc descending select s;
+            //var towary = towaryList.OrderByDescending(s => s.Ilosc).Select(s=>s.Ilosc>5); // źle ??
+            foreach ( var t in towary)
+            lst1.Items.Add(t);
+        }
+
+        private void btn2_Click(object sender, RoutedEventArgs e)
+        {
+            lst2.Items.Clear();
+            var towary = from s in towaryList where s.KategoryOfProduct == (Kategoria)lstBoxKategorie.SelectedIndex select s.Ilosc;
+            int suma = 0;
+            foreach (var t in towary) { 
+            suma += t;
+            }
+            lst2.Items.Add(suma);
+
+        }
+
+        private void btn3_Click(object sender, RoutedEventArgs e)
+        {
+
+            var towaryDoWyswielenia = from s in towaryList where s.Cena > sredniaCena select s.Nazwa +" kosztuje:"+ s.Cena+"zl";
+            foreach (var t in towaryDoWyswielenia)
+            {
+                lst3.Items.Add(t);
+            }
+        }
+
+        private void btn5_Click(object sender, RoutedEventArgs e)
+        {
+
+            var towar = from s in towaryList where s.Cena == najwyzszaCena select s.Nazwa + " kosztuje:" + s.Cena + "zl";
+            int pomocnicza = 0;
+
+            foreach (var t in towar)
+            { 
+                    lbl5.Content += " "+t.ToString();
+                    if (pomocnicza+1 != towar.Count())
+                    {
+                        lbl5.Content += "\n lub: ";
+                    }
+                    pomocnicza++;
+            }
+        }
+
+        private void btn4_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                decimal sredniaCenaKategorii = 0;
+                var towary = from s in towaryList where s.KategoryOfProduct == (Kategoria)i select s.Cena;
+                var towaryIl = from s in towaryList where s.KategoryOfProduct == (Kategoria)i select s.Ilosc;
+                int ileTowarowWKategorii = 0, iloscTowarowWKategorii = 0;
+                foreach (var t in towary)
+                {
+                    sredniaCenaKategorii += t;
+                    var pomocniczaCena = t;
+                    if (pomocniczaCena > najwyzszaCena) najwyzszaCena = pomocniczaCena;
+                    ileTowarowWKategorii++;
+
+                }
+                foreach (var t in towaryIl)
+                {
+                    iloscTowarowWKategorii += t;
+                }
+                sredniaCena /= ileTowarowWKategorii;
+
+
+                lst4.Items.Add((Kategoria)i+", towarow jest:"+ ileTowarowWKategorii+", srednia cena:"+sredniaCena);
+            }
+            
+        }
     }
+
 }

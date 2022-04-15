@@ -99,6 +99,10 @@
       <Project>{85212082-3138-47eb-886a-9f8cbca47f48}</Project>
       <Name>Obliczenia</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sprzedaz\Sprzedaz.csproj">
+      <Project>{981a9570-9aec-4b1d-a511-78ad0669f24e}</Project>
+      <Name>Sprzedaz</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
