@@ -62,8 +62,8 @@ namespace Lab6
 
         private void btnF3_Click(object sender, RoutedEventArgs e)
         {
-            (double, double) wynik;
-            wynik = Funkcje.ZnajdzMinimumFunkcji2D(-100, -100, 100, 100, 1000, (x, y) =>
+            (double?, double?, double?) wynik;
+            wynik = Funkcje.ZnajdzMinimumFunkcji2D(-100, -50, 50, 100, 1000, (x, y) =>
             {
                 if (x > -1 && x < 1 && y > -2 && y < 2){
                     return (x * x) + (y * y); 
@@ -71,21 +71,21 @@ namespace Lab6
                 else { return 30; } 
             
             });
-            MessageBox.Show(wynik.Item1 + wynik.Item2.ToString());
+            MessageBox.Show("x:" + wynik.Item1 + " y:" + wynik.Item2.ToString() + " Wynik:" + wynik.Item3.ToString());
         }
 
         private void btnF2_Click(object sender, RoutedEventArgs e)
         {
-            (double, double) wynik;
+            (double?, double?, double?) wynik;
             wynik = Funkcje.ZnajdzMinimumFunkcji2D(-100, -100, 100, 100, 1000, (x,y)=>((x-4)*(x-4))+((y+2)*(y+2)));
-            MessageBox.Show(wynik.Item1 + wynik.Item2.ToString());
+            MessageBox.Show("x:"+wynik.Item1 +" y:"+ wynik.Item2.ToString() + " Wynik:" + wynik.Item3.ToString());
         }
 
         private void btnRosenbrocka_Click(object sender, RoutedEventArgs e)
         {
-            (double, double) wynik;
+            (double?, double?, double?) wynik;
             wynik = Funkcje.ZnajdzMinimumFunkcji2D(0, 0, 1, 1, 1000, FunkcjaRosenbrocka);
-            MessageBox.Show(wynik.Item1 + wynik.Item2.ToString());
+            MessageBox.Show("x:" + wynik.Item1 + " y:" + wynik.Item2.ToString() + " Wynik:" + wynik.Item3.ToString());
         }
     
         public (double,double) ObliczKolo(double r)
