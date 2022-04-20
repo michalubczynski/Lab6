@@ -97,9 +97,10 @@ namespace Lab6
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            var towary = from s in towaryList where s.Ilosc > 5 orderby s.Ilosc descending select s;
-            //var towary = towaryList.OrderByDescending(s => s.Ilosc).Select(s=>s.Ilosc>5); // źle ??
-            foreach ( var t in towary)
+            lst1.Items.Clear();
+            //var towary = from s in towaryList where s.Ilosc > 5 orderby s.Ilosc descending select s; // Poprawny sposób bez wykorzystania LINQ
+            var towarety = (from s in towaryList where s.Ilosc > 5 select s).OrderByDescending(s => s.Ilosc);
+            foreach ( var t in towarety)
             lst1.Items.Add(t);
         }
 
@@ -117,8 +118,9 @@ namespace Lab6
 
         private void btn3_Click(object sender, RoutedEventArgs e)
         {
-
-            var towaryDoWyswielenia = from s in towaryList where s.Cena > sredniaCena select s.Nazwa +" kosztuje:"+ s.Cena+"zl";
+            lst3.Items.Clear();
+            var towaryDoWyswielenia = from s in towaryList where s.Cena > sredniaCena select s.Nazwa +" kosztuje:"+ s.Cena+"zl";//BEZ LINQ
+            var towarety = from s in towaryList where s.Cena > (from s2 in towaryList select s2.Cena).Average() select s.Nazwa + " kosztuje:" + s.Cena + "zl"; //Z LINQ
             foreach (var t in towaryDoWyswielenia)
             {
                 lst3.Items.Add(t);
@@ -130,7 +132,8 @@ namespace Lab6
 
             var towar = from s in towaryList where s.Cena == najwyzszaCena select s.Nazwa + " kosztuje:" + s.Cena + "zl";
             int pomocnicza = 0;
-
+            var towarety = (from s in towaryList select s.Cena).Max();//Wykorzystanie LINQ
+            MessageBox.Show("Najdroższy towar znaleziony dzieki LINQ kosztuje:"+towarety.ToString()+"zl");
             foreach (var t in towar)
             { 
                     lbl5.Content += " "+t.ToString();
@@ -144,6 +147,7 @@ namespace Lab6
 
         private void btn4_Click(object sender, RoutedEventArgs e)
         {
+            lst4.Items.Clear();
             for (int i = 0; i < 3; i++)
             {
                 decimal sredniaCenaKategorii = 0;
