@@ -19,6 +19,7 @@ namespace Lab6
     /// <summary>
     /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window
     {
         List<Towary> towaryList;
@@ -173,6 +174,15 @@ namespace Lab6
             }
             
         }
+
+    }
+    public static class LINQMINMAX
+    {
+        public static (J a, J b) MinMax<I, J>(this IEnumerable<I> Obiekt, Func<I, J> lambda)
+        {
+            var lista = Obiekt.OrderBy(x => lambda.Invoke(x)).Select(x => lambda.Invoke(x));
+            return (lista.First(), lista.Last());
+            }
     }
 
 }
